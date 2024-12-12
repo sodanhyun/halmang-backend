@@ -35,6 +35,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final EnumPath<com.goormthon.halmang.constant.enumVal.UserRole> userRole = createEnum("userRole", com.goormthon.halmang.constant.enumVal.UserRole.class);
 
+    public final EnumPath<com.goormthon.halmang.constant.enumVal.UserType> userType = createEnum("userType", com.goormthon.halmang.constant.enumVal.UserType.class);
+
     public QUser(String variable) {
         super(User.class, forVariable(variable));
     }

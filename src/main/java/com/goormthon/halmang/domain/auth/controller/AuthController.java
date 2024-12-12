@@ -1,9 +1,11 @@
 package com.goormthon.halmang.domain.auth.controller;
 
 import com.goormthon.halmang.domain.auth.requestDto.LoginDto;
+import com.goormthon.halmang.domain.auth.requestDto.UserFormDto;
 import com.goormthon.halmang.domain.auth.responseDto.TokenRes;
 import com.goormthon.halmang.domain.auth.service.AuthService;
 import com.goormthon.halmang.utils.CookieUtil;
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,6 +26,37 @@ import static com.goormthon.halmang.constant.JwtTokenConstant.*;
 public class AuthController {
 
     private final AuthService authService;
+
+    @PostConstruct
+    public void init() {
+        if(!authService.isExistUser("parent")) {
+            authService.regist(UserFormDto.builder()
+                    .id("parent")
+                    .password("1234")
+                    .name("김순자")
+                    .type("parent")
+                    .build());
+        }
+        if(!authService.isExistUser("child")) {
+            authService.regist(UserFormDto.builder()
+                    .id("child")
+                    .password("1234")
+                    .name("이지은")
+                    .type("child")
+                    .build());
+        }
+    }
+
+    @PostMapping("/regist")
+    public ResponseEntity<?> signup(@Valid @RequestBody UserFormDto userFormDto) {
+        try{
+            authService.regist(userFormDto);
+            return ResponseEntity.ok().build();
+        }catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.METHOD_NOT_ALLOWED);
+        }
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginDto loginDto, HttpServletResponse response) {
         try{

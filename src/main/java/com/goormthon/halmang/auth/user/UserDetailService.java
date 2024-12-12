@@ -25,8 +25,7 @@ public class UserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String username) {
 
-        User user = userRepository.findById(username)
-                .orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 유저입니다."));
+        User user = userRepository.findById(username).orElse(null);
         return new UserDetail(user, getAuthorities(user));
     }
 

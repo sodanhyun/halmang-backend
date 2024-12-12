@@ -2,16 +2,15 @@ package com.goormthon.halmang.entity;
 
 import com.goormthon.halmang.auditing.BaseTimeEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name = "send_emoji")
 @Getter
 @Setter
 @ToString
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class SendEmoji extends BaseTimeEntity {
 
@@ -31,6 +30,11 @@ public class SendEmoji extends BaseTimeEntity {
     @JoinColumn(referencedColumnName = "user_id", name = "receiver_id", nullable = false)
     private User receiver;
 
-    private Boolean readFlag = false;
+    private Boolean readFlag;
+
+    public SendEmoji updateReadFlag(Boolean readFlag) {
+        this.readFlag = readFlag;
+        return this;
+    }
 
 }

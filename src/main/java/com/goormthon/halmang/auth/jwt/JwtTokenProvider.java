@@ -104,7 +104,7 @@ public class JwtTokenProvider {
             return "tampered";
         } catch (NullPointerException exception) {
             log.error("Token is null");
-            return null;
+            return "null";
         }
     }
 

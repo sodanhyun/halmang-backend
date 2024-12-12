@@ -2,6 +2,7 @@ package com.goormthon.halmang.domain.auth.service.impl;
 
 import com.goormthon.halmang.auth.jwt.JwtTokenProvider;
 import com.goormthon.halmang.domain.auth.requestDto.LoginDto;
+import com.goormthon.halmang.domain.auth.requestDto.UserFormDto;
 import com.goormthon.halmang.domain.auth.responseDto.TokenRes;
 import com.goormthon.halmang.domain.auth.service.AuthService;
 import com.goormthon.halmang.domain.auth.service.RefreshTokenService;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +29,13 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final RefreshTokenService refreshTokenService;
 
+    public void regist(UserFormDto userFormDto) {
+        if (userRepository.findById(userFormDto.getId()).orElse(null) != null) {
+            throw new RuntimeException("이미 가입되어 있는 유저입니다.");
+        }
+        User member = User.createByOwn(userFormDto, new BCryptPasswordEncoder());
+        userRepository.save(member);
+    }
 
     public TokenRes login(LoginDto loginDto) throws EntityNotFoundException {
         User user = userRepository.findById(loginDto.getId())
@@ -42,8 +51,13 @@ public class AuthServiceImpl implements AuthService {
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .userRole(user.getUserRole())
-                .userType("own")
+                .userType(user.getUserType())
                 .build();
+    }
+
+    @Override
+    public Boolean isExistUser(String userId) {
+        return userRepository.findById(userId).orElse(null) != null;
     }
 
     public void invalidRefreshToken(Authentication authentication) {

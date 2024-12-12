@@ -1,5 +1,7 @@
 package com.goormthon.halmang;
 
+import com.goormthon.halmang.domain.auth.service.AuthService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
