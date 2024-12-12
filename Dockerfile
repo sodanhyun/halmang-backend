@@ -1,9 +1,3 @@
-FROM openjdk:17-jdk-alpine
-ARG JAR_FILE=build/libs/wqproject-0.0.1-SNAPSHOT.jar
-COPY $JAR_FILE app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "./app.jar"]
-
 # gradle:7.3.1-jdk17 이미지를 기반으로 함
 FROM krmp-d2hub-idock.9rum.cc/goorm/gradle:7.3.1-jdk17
 
