@@ -23,6 +23,7 @@ public class SendEmojiRepositoryCustomImpl extends Querydsl4RepositorySupport im
     @Override
     public List<SendEmojiRes> findAllUnread(String userId) {
         return select(new QSendEmojiRes(
+                sendEmoji.sendSeq,
                 sendEmoji.eId,
                 sendEmoji.sender.id,
                 sendEmoji.receiver.id,

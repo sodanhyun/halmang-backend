@@ -29,14 +29,6 @@ public class SendEmojiRes {
     private LocalDateTime regTime;
 
     @QueryProjection
-    public SendEmojiRes(String eId, String senderId, String receiverId, LocalDateTime regTime) {
-        this.eId = eId;
-        this.senderId = senderId;
-        this.receiverId = receiverId;
-        this.regTime = regTime;
-    }
-
-    @QueryProjection
     public SendEmojiRes(Long SendSeq, String eId, String senderId, String receiverId, LocalDateTime regTime) {
         this.sendSeq = SendSeq;
         this.eId = eId;

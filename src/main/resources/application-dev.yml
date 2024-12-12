@@ -1,4 +1,4 @@
-domainName: "http://localhost:3000"
+domainName: "https://localhost:3000"
 
 server:
   port: 8080
