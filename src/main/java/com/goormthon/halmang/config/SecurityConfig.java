@@ -57,7 +57,7 @@ public class SecurityConfig {
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .authorizeHttpRequests( request -> request
                         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                        .requestMatchers(antMatcher("/auth/**")).permitAll()
+                        .requestMatchers(antMatcher("/api/auth/**")).permitAll()
 //                        .requestMatchers(antMatcher("/account/regist")).permitAll()
 //                        .requestMatchers(antMatcher("/lecture/image/*")).permitAll()
 //                        .requestMatchers(antMatcher("/lecture/limit/*")).permitAll()

@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/emoji")
+@RequestMapping("/api/emoji")
 @RequiredArgsConstructor
 @Slf4j
 public class EmojiController {
