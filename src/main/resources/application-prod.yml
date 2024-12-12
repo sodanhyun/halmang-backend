@@ -1,4 +1,4 @@
-domainName: "http://frontend"
+# domainName: "http://frontend"
 
 server:
   port: 8080
@@ -9,7 +9,7 @@ spring:
       on-profile: prod
 
   datasource:
-    url: ${DATABASE_URL}?useSSL=false&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Seoul
+    url: ${DATABASE_URL}?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Seoul
     username: root
     password: root
     driver-class-name: org.mariadb.jdbc.Driver
