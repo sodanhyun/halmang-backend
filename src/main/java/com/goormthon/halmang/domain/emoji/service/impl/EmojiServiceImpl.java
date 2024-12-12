@@ -2,6 +2,8 @@ package com.goormthon.halmang.domain.emoji.service.impl;
 
 import com.goormthon.halmang.domain.emoji.responseDto.SendEmojiRes;
 import com.goormthon.halmang.domain.emoji.service.EmojiService;
+import com.goormthon.halmang.domain.sse.CustomEventPublisher;
+import com.goormthon.halmang.domain.sse.EventService;
 import com.goormthon.halmang.entity.SendEmoji;
 import com.goormthon.halmang.entity.User;
 import com.goormthon.halmang.repository.SendEmojiRepository;
@@ -20,7 +22,7 @@ import java.util.List;
 @Slf4j
 @Transactional
 public class EmojiServiceImpl implements EmojiService {
-
+    private final EventService eventService;
     private final SendEmojiRepository sendEmojiRepository;
     private final UserRepository userRepository;
 
@@ -41,7 +43,8 @@ public class EmojiServiceImpl implements EmojiService {
                 .receiver(receiver)
                 .readFlag(false)
                 .build();
-        sendEmojiRepository.save(sendEmoji);
+        sendEmojiRepository.saveAndFlush(sendEmoji);
+        eventService.publish(receiverId);
     }
 
     @Override
