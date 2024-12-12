@@ -1,4 +1,4 @@
-domainName: "http://localhost:3000"
+domainName: "http://frontend"
 
 server:
   port: 8080
