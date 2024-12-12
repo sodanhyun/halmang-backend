@@ -34,7 +34,7 @@ dependencies {
 	implementation "com.querydsl:querydsl-jpa:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
 	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
 	runtimeOnly 'com.mysql:mysql-connector-j'
-//	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
 	//ws
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
