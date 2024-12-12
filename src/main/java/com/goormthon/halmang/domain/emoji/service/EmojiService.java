@@ -17,4 +17,6 @@ public interface EmojiService {
 
     public Long getCountAtToday(String userId);
 
+    public Long getTotalCountAtToday(String userId, LocalDate date);
+
 }

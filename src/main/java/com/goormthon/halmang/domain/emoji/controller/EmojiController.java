@@ -90,4 +90,18 @@ public class EmojiController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    /*
+    api5.
+    user가 하루동안 주고 받은
+    이모지의 카운트 수
+     */
+    @GetMapping("/total_count")
+    public ResponseEntity<?> totalCount(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
+                                        Authentication authentication) {
+        Long todayTotalEmojiCnt = emojiService.getTotalCountAtToday(authentication.getName(), date);
+        HashMap<String, Long> res = new HashMap<>();
+        res.put("total_count", todayTotalEmojiCnt);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
 }

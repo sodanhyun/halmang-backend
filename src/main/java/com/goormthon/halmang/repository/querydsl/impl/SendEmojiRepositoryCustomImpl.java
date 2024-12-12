@@ -64,4 +64,16 @@ public class SendEmojiRepositoryCustomImpl extends Querydsl4RepositorySupport im
                         .and(sendEmoji.regTime.between(startOfDay, endOfDay)))
                 .fetchOne();
     }
+
+    @Override
+    public Long getTotalCountAtToday(String userId, LocalDate date) {
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = startOfDay.plusDays(1);
+        return select(sendEmoji.count())
+                .from(sendEmoji)
+                .where((sendEmoji.sender.id.eq(userId)
+                        .or(sendEmoji.receiver.id.eq(userId)))
+                        .and(sendEmoji.regTime.between(startOfDay, endOfDay)))
+                .fetchOne();
+    }
 }

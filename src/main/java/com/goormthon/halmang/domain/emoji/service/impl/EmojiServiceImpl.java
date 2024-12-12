@@ -64,4 +64,9 @@ public class EmojiServiceImpl implements EmojiService {
     public Long getCountAtToday(String userId) {
         return sendEmojiRepository.getCountAtToday(userId);
     }
+
+    @Override
+    public Long getTotalCountAtToday(String userId, LocalDate date) {
+        return sendEmojiRepository.getTotalCountAtToday(userId, date);
+    }
 }

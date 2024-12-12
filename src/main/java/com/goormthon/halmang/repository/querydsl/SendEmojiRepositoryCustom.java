@@ -13,4 +13,6 @@ public interface SendEmojiRepositoryCustom {
 
     Long getCountAtToday(String userId);
 
+    Long getTotalCountAtToday(String userId, LocalDate date);
+
 }
