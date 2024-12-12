@@ -1,4 +1,4 @@
-domainName: "https://localhost:3000"
+domainName: "https://172.30.1.22:3000"
 
 server:
   port: 8080
@@ -16,7 +16,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
 
 jwt:
   issuer: halmang
