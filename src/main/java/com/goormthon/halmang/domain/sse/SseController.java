@@ -14,7 +14,7 @@ import java.util.List;
 public class SseController {
     private final List<SseEmitter> emitters = new ArrayList<>();
 
-    @GetMapping(value = "/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "/api/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter streamSse() {
         SseEmitter emitter = new SseEmitter();
         emitters.add(emitter);

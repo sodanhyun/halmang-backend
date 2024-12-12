@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import static com.goormthon.halmang.constant.JwtTokenConstant.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
