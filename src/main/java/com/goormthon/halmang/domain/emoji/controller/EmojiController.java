@@ -3,6 +3,7 @@ package com.goormthon.halmang.domain.emoji.controller;
 import com.goormthon.halmang.domain.emoji.requestDto.SendEmojiReq;
 import com.goormthon.halmang.domain.emoji.responseDto.SendEmojiRes;
 import com.goormthon.halmang.domain.emoji.service.EmojiService;
+import com.goormthon.halmang.domain.sse.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class EmojiController {
-
+    private final EventService eventService;
     private final EmojiService emojiService;
 
     /*
@@ -46,6 +47,11 @@ public class EmojiController {
         if(sendEmojiReq.getReceiverId().equals(authentication.getName()))
             return new ResponseEntity<>("you cant send yourself", HttpStatus.BAD_REQUEST);
         emojiService.sendEmoji(sendEmojiReq.getEId(), authentication.getName(), sendEmojiReq.getReceiverId());
+        try{
+            eventService.publish(sendEmojiReq.getReceiverId());
+        }catch(Throwable e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+        }
         return new ResponseEntity<>("emoji send successfully done", HttpStatus.OK);
     }
 
