@@ -22,7 +22,6 @@ import java.util.List;
 @Slf4j
 @Transactional
 public class EmojiServiceImpl implements EmojiService {
-    private final EventService eventService;
     private final SendEmojiRepository sendEmojiRepository;
     private final UserRepository userRepository;
 
@@ -44,7 +43,6 @@ public class EmojiServiceImpl implements EmojiService {
                 .readFlag(false)
                 .build();
         sendEmojiRepository.saveAndFlush(sendEmoji);
-        eventService.publish(receiverId);
     }
 
     @Override
